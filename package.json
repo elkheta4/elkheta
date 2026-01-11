@@ -1,0 +1,27 @@
+{
+  "name": "react-temp",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "google-auth-library": "^10.5.0",
+    "google-spreadsheet": "^5.0.2",
+    "googleapis": "^169.0.0",
+    "lucide-react": "^0.562.0",
+    "next": "^16.1.0",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3"
+  },
+  "devDependencies": {
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "eslint": "^8.0.0",
+    "eslint-config-next": "^16.1.0"
+  }
+}

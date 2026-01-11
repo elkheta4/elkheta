@@ -1,0 +1,454 @@
+/* =========================================
+   USER MANAGEMENT - PREMIUM MODALS
+   ========================================= */
+
+/* 1. Main View Improvements */
+.um-add-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.25rem;
+  font-weight: 500;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s;
+  background-color: var(--primary);
+  color: white;
+  border: 1px solid var(--primary);
+  cursor: pointer;
+}
+
+.um-add-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+  background-color: var(--primary-hover);
+}
+
+.um-refresh-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: var(--shadow-sm);
+}
+
+.um-refresh-btn:hover {
+    background: var(--bg-body);
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
+.um-refresh-btn:disabled {
+    opacity: 0.6;
+    cursor: default;
+}
+
+.um-edit-btn {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.8rem;
+  background-color: var(--bg-body);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.um-edit-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+/* Role Badges */
+.role-badge {
+    display: inline-block;
+    padding: 0.2em 0.6em;
+    font-size: 0.75em;
+    font-weight: 600;
+    border-radius: 999px;
+    text-transform: uppercase;
+}
+.role-badge.admin {
+    background: rgba(99, 102, 241, 0.1);
+    color: var(--primary);
+}
+.role-badge.user {
+    background: rgba(107, 114, 128, 0.1);
+    color: var(--text-secondary);
+}
+
+.wallet-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  background-color: var(--bg-body);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  font-family: monospace;
+}
+
+.um-wallets-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    justify-content: center; /* Centered as requested */
+}
+
+
+/* 2. Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px); /* Glass effect */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* 3. Modal Content Card */
+.modal-content {
+  background: var(--bg-surface);
+  width: 100%;
+  max-width: 550px;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden; /* For header clipping */
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px) scale(0.98); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+/* 4. Modal Header */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid var(--border-color);
+  background: var(--bg-body);
+}
+
+.modal-header h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-main);
+  margin: 0;
+}
+
+.close-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 0.4rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.close-btn:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--danger);
+  /* transform: rotate(90deg); REMOVED */
+}
+
+/* 5. Form & Grid */
+.modal-form {
+  padding: 2rem;
+}
+
+.form-row {
+  display: list-item; /* Override potential blocks */
+  display: grid; 
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+/* 6. Inputs with Icons */
+.input-with-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-icon {
+    position: absolute;
+    left: 1rem;
+    color: var(--text-secondary);
+    pointer-events: none;
+    z-index: 2;
+}
+
+.input-with-icon input,
+.input-with-icon select {
+    width: 100%;
+    padding: 0.75rem 1rem 0.75rem 2.75rem; /* Left padding for icon */
+    font-size: 0.95rem;
+    /* background: var(--bg-body); REMOVED */
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    color: var(--text-main);
+    transition: all 0.2s;
+}
+
+.input-with-icon input:focus,
+.input-with-icon select:focus {
+    outline: none;
+    background: var(--bg-surface);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+.hint-text {
+    display: block;
+    margin-top: 0.4rem;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+/* 7. Modal Footer & Buttons */
+.modal-footer {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.btn-secondary {
+  padding: 0.6rem 1.25rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: transparent;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-secondary:hover {
+    background: var(--bg-body);
+    color: var(--text-main);
+}
+
+.btn-primary {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.25rem;
+  font-weight: 500;
+  color: white;
+  background: var(--primary);
+  border: 1px solid var(--primary);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s;
+}
+
+.btn-primary:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.btn-primary:hover:not(:disabled) {
+    background: var(--primary-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Error/Empty Table States */
+.um-empty-row, 
+.um-loading-row {
+  text-align: center;
+  color: var(--text-secondary);
+  padding: 3rem 1rem;
+  /* Ensure content is centered if it contains flex items */
+  display: flex-cell; /* Table cell behavior override if needed, but easier to style inner content */
+  vertical-align: middle;
+}
+
+/* Force inner content to center if it's a direct text or icon mix */
+.um-loading-row {
+    display: table-cell;
+    vertical-align: middle;
+}
+/* We need to ensure the svg is aligned with text. */
+.um-loading-row svg {
+    vertical-align: middle;
+    margin-right: 0.5rem;
+    margin-bottom: 2px; /* slight visual adjustment */
+}
+.um-error-row {
+  text-align: center;
+  color: var(--danger);
+  padding: 1rem;
+}
+
+/* 10. Interactive Icon Buttons (Clean & Premium) */
+.um-icon-action-btn {
+    background: transparent;
+    border: none;
+    padding: 6px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    /* Performance Optimizations for Smooth Scale */
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.2s; /* Spring-like effect */
+    will-change: transform;
+    transform-origin: center center;
+    backface-visibility: hidden; /* Fix Webkit jitter */
+    -webkit-font-smoothing: subpixel-antialiased;
+}
+
+.um-icon-action-btn:hover {
+    transform: scale(1.1); /* Slightly reduced scale for stability */
+}
+
+.um-icon-action-btn:active {
+    transform: scale(0.95);
+}
+
+/* Add Button (Green Tint) */
+.um-icon-add {
+    color: #10b981;
+}
+
+.um-icon-add:hover {
+    background-color: rgba(16, 185, 129, 0.12); 
+    color: #059669;
+}
+
+/* Delete Button (Red Tint) */
+.um-icon-del {
+    color: #ef4444;
+}
+
+.um-icon-del:hover {
+    background-color: rgba(239, 68, 68, 0.12);
+    color: #dc2626;
+}
+
+/* =========================================
+   11. DATA TABLE STYLES (Restored)
+   ========================================= */
+
+/* Table Wrapper */
+.data-table-wrapper {
+  width: 100%;
+  background-color: var(--bg-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-color);
+  overflow: hidden; 
+  overflow-x: auto; 
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* Base Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  white-space: nowrap; 
+  font-size: 0.925rem;
+}
+
+/* Header */
+thead {
+  background-color: var(--bg-body); 
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+th {
+  text-align: center;
+  padding: 1.25rem 1.5rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* Body & Rows */
+tbody tr {
+  transition: background-color 0.2s ease;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+tbody tr:nth-child(even) {
+  background-color: rgba(0, 0, 0, 0.005); 
+}
+
+tbody tr:hover {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+/* Cells */
+td {
+  padding: 1.25rem 1.5rem;
+  color: var(--text-main);
+  vertical-align: middle;
+}
+
+/* Empty/Loading States */
+.um-empty-row, 
+.um-loading-row {
+     text-align: center;
+     padding: 4rem 1rem !important;
+}
+
+.um-empty-row {
+    color: var(--text-secondary);
+}
+
+.um-loading-row {
+    color: var(--primary);
+    font-weight: 500;
+}

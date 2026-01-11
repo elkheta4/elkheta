@@ -1,0 +1,278 @@
+/* =========================================
+   USER OVERVIEW - ANALYTICS DASHBOARD
+   Pure CSS Charts & Modern Design
+   ========================================= */
+
+/* Base Container */
+#view-overview {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  animation: fadeIn 0.3s ease-in-out;
+  margin-bottom: 30px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Loading State */
+.uo-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 4rem;
+  color: var(--text-secondary);
+}
+
+/* Header */
+.uo-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.uo-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-main);
+  margin: 0;
+}
+
+.uo-name {
+  color: var(--primary);
+}
+
+.uo-subtitle {
+  color: var(--text-secondary);
+  margin: 0.25rem 0 0 0;
+  font-size: 0.95rem;
+}
+
+/* Header Actions */
+.uo-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.uo-refresh-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.uo-refresh-btn:hover {
+  background: var(--bg-body);
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+.uo-refresh-btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.uo-updated-text {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+/* Time Filter */
+.uo-time-filter {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.uo-filter-btn {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.uo-filter-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.uo-filter-btn.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: white;
+}
+
+
+
+/* Stats Grid */
+.uo-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.uo-stat-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem;
+  background: var(--bg-surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+}
+
+.uo-stat-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  flex-shrink: 0;
+}
+
+.uo-stat-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.uo-stat-label {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.uo-stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+/* Recent Orders */
+.uo-recent-card {
+  background: var(--bg-surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+  padding: 1.25rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.uo-recent-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.uo-chart-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-main);
+  margin: 0;
+}
+
+.uo-view-all {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--primary);
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.uo-view-all:hover {
+  opacity: 0.8;
+}
+
+.uo-recent-table {
+  overflow-x: auto;
+}
+
+.uo-recent-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.uo-recent-table th {
+  background: var(--bg-body); /* Match MyOrders style */
+  text-align: center;
+  padding: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.uo-recent-table td {
+  text-align: center;
+  padding: 0.75rem;
+  color: var(--text-main);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.uo-recent-table tr:last-child td {
+  border-bottom: none;
+}
+
+.uo-recent-table td.uo-cost {
+  font-weight: 600;
+  color: var(--success);
+}
+
+.uo-empty {
+  text-align: center;
+  color: var(--text-secondary);
+  padding: 2rem !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .uo-stats-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .uo-stat-value {
+    font-size: 1.25rem;
+  }
+
+  .uo-recent-table {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .uo-stats-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,118 @@
+.not-found-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  text-align: center;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Background Decoration (Optional subtle glow) */
+.not-found-container::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, var(--primary-color-alpha, rgba(37, 99, 235, 0.1)) 0%, transparent 70%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.nf-content {
+  position: relative;
+  z-index: 1;
+  max-width: 600px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  padding: 3rem;
+  border-radius: 24px;
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.nf-logo {
+  margin-bottom: 2rem;
+  height: auto;
+  width: auto;
+  object-fit: contain;
+}
+
+.nf-code {
+  font-size: 8rem;
+  font-weight: 800;
+  line-height: 1;
+  margin: 0;
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color, #4f46e5));
+  background-clip: text;
+  -webkit-background-clip: text;
+  margin-bottom: 1rem;
+  letter-spacing: -4px;
+}
+
+.nf-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.nf-desc {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  margin-bottom: 2.5rem;
+  line-height: 1.6;
+}
+
+.nf-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.nf-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.5rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.nf-btn.primary {
+  background-color: var(--primary-hover);
+  color: white;
+  border: none;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.nf-btn.primary:hover {
+  opacity: 0.9;
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.nf-btn.secondary {
+  background-color: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+.nf-btn.secondary:hover {
+  background-color: var(--bg-hover);
+  border-color: var(--text-secondary);
+  transform: translateY(-2px);
+}

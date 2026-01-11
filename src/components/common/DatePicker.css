@@ -1,0 +1,198 @@
+/* DatePicker.css - Premium Calendar Style */
+
+.datepicker-container {
+  position: relative;
+  width: 100%;
+}
+
+.datepicker-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* Input that looks like the project's standard inputs */
+.datepicker-input {
+  width: 100%;
+  padding: 0.6rem 1rem;
+  /* Matched to AllOrders inputs */
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background-color: var(--bg-surface);
+  color: var(--text-main);
+  font-size: 0.95rem;
+  /* Standard field font */
+  outline: none;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.datepicker-input:focus,
+.datepicker-input:active {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.datepicker-icon {
+  position: absolute;
+  right: 12px;
+  color: var(--text-secondary);
+  pointer-events: none;
+}
+
+/* Popup Calendar */
+.datepicker-popup {
+  position: absolute;
+  top: 105%;
+  left: 0;
+  width: 280px;
+  /* Comfortable width */
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-xl);
+  padding: 1rem;
+  z-index: 100;
+  user-select: none;
+  animation: fadeInScale 0.1s ease-out;
+}
+
+/* Top position modifier */
+.datepicker-popup--top {
+  top: auto;
+  bottom: 66%;
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.98) translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Header: Month/Year Nav */
+.datepicker-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.datepicker-nav-btn {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  border-radius: var(--radius-sm);
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.datepicker-nav-btn:hover {
+  background-color: var(--bg-body);
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+.datepicker-title {
+  font-weight: 600;
+  color: var(--text-main);
+  font-size: 0.95rem;
+}
+
+/* Days Grid */
+.datepicker-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  margin-bottom: 0.5rem;
+}
+
+/* Day Names Row */
+.datepicker-day-name {
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+/* Day Cells */
+.datepicker-day {
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  cursor: pointer;
+  color: var(--text-main);
+  transition: all 0.1s;
+}
+
+.datepicker-day:hover {
+  background-color: var(--bg-body);
+  color: var(--primary);
+}
+
+.datepicker-day.empty {
+  pointer-events: none;
+}
+
+/* Selected Day */
+.datepicker-day.selected {
+  background-color: var(--primary);
+  color: white !important;
+  font-weight: 600;
+}
+
+/* Today Indicator (Subtle ring or text color) */
+.datepicker-day.today {
+  border: 1px solid var(--primary);
+  color: var(--primary);
+}
+
+.datepicker-day.today.selected {
+  border: none;
+  color: white;
+}
+
+/* Footer: Today Button (Now below header) */
+.datepicker-footer {
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.75rem;
+  margin-bottom: 0.75rem;
+  text-align: center;
+}
+
+.datepicker-today-link {
+  width: 100%;
+  padding: 0.5rem;
+  background-color: var(--primary);
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.datepicker-today-link:hover {
+  background-color: var(--primary-hover);
+  text-decoration: none;
+  opacity: 0.9;
+}

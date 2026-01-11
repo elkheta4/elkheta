@@ -1,0 +1,330 @@
+/* =========================================
+   SIDEBAR SYSTEM (Shared Component)
+   Refined Premium Design (Legacy Palette)
+   ========================================= */
+
+/* The Main Container */
+.sidebar {
+  width: var(--sidebar-width);
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: var(--bg-surface);
+  border-right: 1px solid var(--border-color);
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.03);
+}
+
+.sidebar.desktop-hidden {
+  transform: translateX(-100%);
+}
+
+/* ANTI-FLICKER OVERRIDE */
+html.sidebar-hidden .sidebar {
+  transform: translateX(-100%) !important;
+}
+
+/* Header / Branding */
+.sidebar-header {
+  padding: 0.5rem 1rem;
+  /* Reduced vertical padding */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Centered */
+  gap: 0;
+  margin-bottom: 0;
+  /* Removed margin-bottom */
+  margin-top: 1rem;
+}
+
+.sidebar-header-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 190px;
+  /* Requested Width */
+  height: 80px;
+  /* Requested Height */
+  background: transparent;
+  border-radius: var(--radius-lg);
+}
+
+.sidebar-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.sidebar-brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-brand-text h1 {
+  font-size: 1.65rem;
+  /* Increased from 1.25rem */
+  font-weight: 800;
+  color: var(--text-main);
+  letter-spacing: -0.02em;
+  margin: 0;
+  line-height: 1;
+}
+
+.sidebar-brand-text small {
+  font-size: 0.85rem;
+  /* Increased from 0.75rem */
+  color: var(--text-secondary);
+  font-weight: 500;
+  letter-spacing: 0;
+  margin-top: 4px;
+  /* Increased spacing */
+}
+
+/* User Profile Section (Premium Redesign - Static) */
+.user-profile {
+  margin: 0.5rem 1rem 1.5rem 1rem;
+  /* Adjusted bottom margin */
+  padding: 1.25rem;
+  /* Lush padding */
+  background-color: #ffffff;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+  /* Increased gap */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+  cursor: default;
+  position: relative;
+  overflow: visible;
+}
+
+/* Avatar Wrapper & Status */
+.user-avatar-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-avatar {
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  background-color: var(--bg-body);
+  color: var(--primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  border: 2px solid transparent;
+}
+
+.user-profile-info {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.user-info-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.user-profile-info h3 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 130px;
+  /* Increased available width since settings is gone */
+}
+
+/* Role Badges */
+.user-role-badge {
+  font-size: 0.75rem;
+  /* Slightly larger */
+  font-weight: 600;
+  /* Regular weight */
+  /* text-transform: uppercase; REMOVED */
+  text-transform: capitalize;
+  /* Title Case */
+  letter-spacing: 0;
+  margin-top: 2px;
+  padding: 0;
+  color: var(--text-secondary);
+  background: transparent;
+  border: none;
+}
+
+/* Specific Role Colors */
+.user-role-badge.admin {
+  color: var(--primary);
+}
+
+.user-role-badge.sales,
+.user-role-badge.user {
+  color: var(--success);
+}
+
+
+/* Navigation List */
+.nav-list {
+  list-style: none;
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.nav-item {
+  width: 100%;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.85rem 1rem;
+  color: var(--text-secondary);
+  border-radius: var(--radius-md);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  font-weight: 500;
+  font-size: 1rem;
+  text-decoration: none;
+  border-left: 4px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-link svg {
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.nav-link:hover {
+  background-color: var(--bg-body);
+  color: var(--text-main);
+}
+
+.nav-link:hover svg {
+  opacity: 1;
+}
+
+.nav-link.active {
+  background-color: var(--primary-light);
+  /* Orange Tint */
+  color: var(--primary);
+  border-left-color: var(--primary);
+  font-weight: 600;
+}
+
+.nav-link.active svg {
+  opacity: 1;
+  stroke-width: 2.5px;
+}
+
+/* Footer / Logout */
+.logout-container {
+  padding: 1.5rem 1rem;
+  margin-top: auto;
+  border-top: 1px solid var(--border-color);
+  /* Separator */
+  background-color: var(--bg-surface);
+  /* Ensure covers content */
+}
+
+.logout-btn {
+  width: 100%;
+  padding: 0.85rem;
+  background-color: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.95rem;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logout-btn:hover {
+  background-color: #fee2e2;
+  /* Light Red */
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+
+/* Responsive Behavior (LG Screens) */
+@media (max-width: 1024px) {
+  .sidebar {
+    transform: translateX(-100%);
+    box-shadow: var(--shadow-lg);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+}
+
+/* Mobile - Ensure logout is always visible */
+@media (max-width: 768px) {
+  .sidebar {
+    height: 100vh;
+    height: 100dvh;
+    /* Dynamic viewport height for mobile browsers */
+    overflow: hidden;
+  }
+
+  .sidebar-header {
+    padding: 0.25rem 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .sidebar-header-icon {
+    width: 150px;
+    height: 60px;
+  }
+
+  .user-profile {
+    margin: 0.5rem 1rem 1rem 1rem;
+    padding: 1rem;
+  }
+
+  .nav-list {
+    flex: 1;
+    overflow-y: auto;
+    max-height: calc(100vh - 280px);
+    /* Leave space for header, profile, logout */
+    max-height: calc(100dvh - 280px);
+  }
+
+  .logout-container {
+    padding: 1rem;
+    position: sticky;
+    bottom: 0;
+    background-color: var(--bg-surface);
+  }
+}

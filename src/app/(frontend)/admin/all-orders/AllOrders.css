@@ -1,0 +1,362 @@
+/* =========================================
+   ALL ORDERS - ENTERPRISE TABLE STYLE
+   Adapted from MyOrders.css
+   Updated: Refined Padding & Borders
+   ========================================= */
+
+/* 1. View Container */
+#view-all-orders {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  height: auto;
+  min-height: 0;
+}
+
+/* 2. Controls Header (Search + Pagination) */
+.controls-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.controls-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* Secondary Controls - Advanced Filters */
+.controls-secondary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.filter-select {
+  padding: 0.6rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background-color: var(--bg-surface);
+  color: var(--text-main);
+  font-size: 0.9rem;
+  min-width: 150px;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.filter-select:hover,
+.filter-select:focus {
+  border-color: var(--primary);
+}
+
+/* --- Date Filter Dropdown Styles --- */
+.date-filter-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--bg-surface);
+  /* Changed to surface to match dropdowns better if needed, or keep body */
+  padding: 0;
+  /* Remove padding as dropdowns have their own */
+  border: none;
+  /* Remove border wrapper if using individual dropdowns */
+  /* Or keep if we want a group look: */
+  /* background: var(--bg-body);
+       padding: 0.25rem 0.75rem;
+       border-radius: var(--radius-md);
+       border: 1px solid var(--border-color); */
+}
+
+/* Styles moved to @/components/common/FilterDropdowns.css */
+
+/* --- End Date Filter Dropdown Styles --- */
+
+
+.date-separator {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin: 0 0.5rem;
+}
+
+.reset-filters-btn {
+  background: none;
+  border: none;
+  color: var(--primary);
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0.2rem 0.5rem;
+  transition: all 0.1s;
+  border: 1px solid var(--primary);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+}
+
+.reset-filters-btn:hover {
+  opacity: 0.8;
+  color: white;
+  background-color: var(--primary);
+}
+
+.pagination-wrapper {
+  margin-left: auto;
+  /* Push pagination to the right */
+}
+
+/* Search Bar - Floating & Modern */
+.search-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex: 1;
+  min-width: 300px;
+}
+
+.search-input {
+  width: 100%;
+  max-width: 500px;
+  /* Increased max-width */
+  padding: 0.75rem 1.25rem;
+  font-size: 0.95rem;
+  color: var(--text-main);
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-fast);
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+.search-input::placeholder {
+  color: var(--text-secondary);
+}
+
+.last-updated-text {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.orders-refresh-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: var(--shadow-sm);
+}
+
+.orders-refresh-btn:hover {
+  background: var(--bg-body);
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+.orders-refresh-btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+/* 3. Table Wrapper - Card Style */
+.data-table-wrapper {
+  width: 100%;
+  background-color: var(--bg-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+  overflow-x: auto;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+
+  /* REQUESTED: 30px bottom margin */
+  margin-bottom: 30px;
+}
+
+/* 4. Base Table Styling */
+.orders-table {
+  width: 100%;
+  border-collapse: collapse;
+  white-space: nowrap;
+  font-size: 0.925rem;
+}
+
+/* 5. Sticky Header */
+.orders-table thead {
+  background-color: var(--bg-body);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.orders-table th {
+  text-align: center;
+  padding: 1.25rem 1.5rem;
+  /* Increased padding */
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* 6. Rows */
+.orders-table tbody tr {
+  transition: background-color 0.2s ease;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  /* Softer border */
+}
+
+.orders-table tbody tr:nth-child(even) {
+  background-color: rgba(0, 0, 0, 0.005);
+}
+
+.orders-table tbody tr:hover {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+.orders-table td.col-money {
+  font-weight: 700;
+  color: var(--success);
+}
+
+/* 7. Cells */
+.orders-table td {
+  padding: 1.25rem 1.5rem;
+  /* Increased padding */
+  color: var(--text-main);
+  vertical-align: middle;
+}
+
+/* Specific Columns */
+.col-idx-cell {
+  font-family: monospace;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.row-link {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.2s;
+  display: block;
+  /* Hit area */
+}
+
+.row-link:hover {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.col-agent-cell {
+  font-weight: 500;
+  color: var(--text-main);
+}
+
+.agent-link {
+  color: var(--primary);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.agent-link:hover {
+  color: var(--primary-hover);
+}
+
+
+/* 8. Interactions */
+.copyable {
+  cursor: pointer;
+  color: var(--primary);
+  font-weight: 500;
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-sm);
+  transition: all 0.2s;
+  /* background: rgba(99, 102, 241, 0.05); REMOVED */
+}
+
+.copyable:hover {
+  background: var(--primary);
+  color: white;
+  text-decoration: none;
+}
+
+/* 9. Premium Loading & Empty States */
+.ao-state-cell {
+  text-align: center;
+  padding: 4rem 1rem !important;
+}
+
+.state-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  color: var(--text-secondary);
+}
+
+.state-content p {
+  margin: 0;
+  font-family: var(--font-main);
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.state-content.error {
+  color: var(--danger);
+}
+
+.state-icon {
+  opacity: 0.6;
+  color: var(--primary);
+}
+
+/* 10. Responsive Tweak */
+@media (max-width: 1024px) {
+  .search-container input {
+    max-width: 100%;
+  }
+}
+
+/* Animation Utilities */
+.spinner-spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Proof Column Alignment */
+.col-proof {
+  text-align: center;
+}
+
+.col-proof .ao-proof-btn {
+  margin: 0 auto;
+}

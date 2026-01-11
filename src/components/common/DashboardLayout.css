@@ -1,0 +1,234 @@
+/* =========================================
+   DASHBOARD LAYOUT (Shell System)
+   ========================================= */
+
+/* The Outer Shell - Fixed Viewport */
+.app-container {
+  display: flex;
+  height: 100vh;
+  /* Fixed height */
+  width: 100vw;
+  overflow: hidden;
+  /* No body scroll */
+  position: relative;
+  background-color: var(--bg-body);
+}
+
+/* Main Content Wrapper */
+/* Floating White Panel with Internal Scroll */
+.main-content {
+  flex: 1;
+  /* Margins for the floating look */
+  margin-left: calc(var(--sidebar-width) + 1.5rem);
+  margin-right: 1.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+
+  /* The "Paper" Look */
+  background-color: var(--bg-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+
+  /* Exact Height Calculation */
+  height: 100vh;
+
+  /* Enabling Internal Scroll */
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+
+  /* SCROLL PROGRESS LOGIC */
+  scroll-timeline-name: --dashboard-scroll;
+  transition: margin-left 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.main-content.full-width {
+  margin-left: 1.5rem;
+  /* Centered look without sidebar offset */
+}
+
+/* ANTI-FLICKER OVERRIDE */
+html.sidebar-hidden .main-content {
+  margin-left: 1.5rem !important;
+}
+
+/* Progress Indicator attached to the panel */
+/* Progress Indicator as Header Bottom Border */
+@supports (animation-timeline: scroll()) {
+  .header-surface::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    /* Progress Bar Height */
+    background: var(--primary);
+    /* Blue Progress */
+
+    transform-origin: left;
+    transform: scaleX(0);
+    /* Start empty horizontally */
+
+    animation: scroll-progress auto linear;
+    animation-timeline: --dashboard-scroll;
+    /* Linked to parent scroll */
+
+    z-index: 50;
+    /* Above header border */
+    pointer-events: none;
+  }
+
+  @keyframes scroll-progress {
+    from {
+      transform: scaleX(0);
+    }
+
+    to {
+      transform: scaleX(1);
+    }
+  }
+}
+
+/* Inner Container */
+.dashboard-inner-container {
+  width: 100%;
+  max-width: 100%;
+  padding: 2rem;
+  margin: 0 auto;
+  flex: 1;
+}
+
+/* Header Surface */
+.header-surface {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border-color);
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+
+
+/* Mobile Toggle Hamburger */
+.mobile-toggle-btn {
+  display: none;
+  /* Hidden on Desktop */
+  background: transparent;
+  color: var(--text-main);
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  /* Remove outline and tap highlight */
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  user-select: none;
+}
+
+.mobile-toggle-btn:focus {
+  outline: none;
+}
+
+.mobile-toggle-btn:active {
+  opacity: 0.7;
+}
+
+/* Overlay for Mobile Drawer */
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 45;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    visibility 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.sidebar-overlay.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* Prevent body scroll when sidebar is open on mobile */
+@media (max-width: 1024px) {
+  .sidebar-overlay.active~.main-content {
+    overflow: hidden;
+    touch-action: none;
+  }
+
+  body:has(.sidebar-overlay.active) {
+    overflow: hidden;
+    touch-action: none;
+  }
+}
+
+
+/* =========================================
+   RESPONSIVE LAYOUT LOGIC
+   ========================================= */
+
+/* LG: Tablet Landscape / Small Laptops */
+@media (max-width: 1024px) {
+
+  .app-container {
+    height: auto;
+    overflow: visible;
+  }
+
+  .main-content {
+    margin: 0;
+    border-radius: 0;
+    height: auto;
+    min-height: 100vh;
+    width: 100%;
+    padding-bottom: 2rem;
+    overflow-y: visible;
+    /* Let body scroll on mobile */
+  }
+
+  .container {
+    padding: 1rem;
+  }
+
+  .mobile-toggle-btn {
+    display: block;
+  }
+
+  .sidebar-overlay.active {
+    display: block;
+  }
+}
+
+/* MD: Tablets Portrait */
+@media (max-width: 768px) {
+  .header-surface {
+    padding: 0.75rem 1rem;
+  }
+}
+
+/* SM: Mobile Phones */
+@media (max-width: 640px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  h2 {
+    font-size: 1.25rem;
+  }
+}

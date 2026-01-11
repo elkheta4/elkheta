@@ -1,0 +1,7 @@
+.copyable-text {
+  transition: all 0.2s ease;
+}
+
+.copyable-text:hover {
+  color: var(--primary);
+}
