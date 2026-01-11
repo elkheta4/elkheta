@@ -97,7 +97,7 @@ const DailyBlock = ({ day, walletNum, expectedBalance, onAddExpense, onCloseDay,
 
     try {
       await onCloseDay(day, {
-        actualBalance: closingBalance,
+        actualBalance: closingBalance === '' ? '0' : closingBalance,
         proofFile: proofFile,
         dateStr: day.date
       });
