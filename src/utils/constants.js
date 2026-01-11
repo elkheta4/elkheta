@@ -19,7 +19,7 @@ export const FORM_CONFIG = {
 
   // Order States
   orderStates: [
-    "Installment",
+    // "Installment",
     "Remaining",
     "OverPayment",
     "Completed"
@@ -42,12 +42,12 @@ export const FORM_CONFIG = {
   // Subscription Packages
   packages: [
     // Full Package
-    "Follow up - Year", "Content - Year",
+    // "Follow up - Year", "Content - Year",
     "Follow up - Term", "Content - Term",
     "Follow up - Month", "Content - Month",
     // Subject Package
-    "Subject - followup - Year", "Subject - Content - Year",
-    "Subject - followup - Term", "Subject - Content - Term",
+    // "Subject - followup - Year", "Subject - Content - Year",
+    "Subject - Followup - Term", "Subject - Content - Term",
     "Subject - Followup - Month", "Subject - Content - Month"
   ],
 
@@ -66,12 +66,12 @@ export const FORM_CONFIG = {
     {
       id: "s2_art",
       triggers: ["S2-AR-ART", "S2-EN-ART"],
-      subjects: ["HISTORY", "ENGLISH", "MATH", "GEOGRAPHY", "ITALIANO", "PSYCHOLOGY", "DEUTSCH", "FRENCH", "ARABIC"]
+      subjects: ["HISTORY", "ENGLISH", "Pure MATH", "GEOGRAPHY", "ITALIANO", "PSYCHOLOGY", "DEUTSCH", "FRENCH", "ARABIC"]
     },
     {
       id: "s2_sci",
       triggers: ["S2-AR-SCIENTIFIC", "S2-EN-SCIENTIFIC"],
-      subjects: ["ENGLISH", "BIOLOGY", "CHEMISTRY", "PHYSICS", "MATH", "ARABIC", "FRENCH", "DEUTSCH", "ITALIANO", "HISTORY"]
+      subjects: ["ENGLISH", "BIOLOGY", "CHEMISTRY", "PHYSICS", "Pure MATH", "Applied MATH", "ARABIC", "FRENCH", "DEUTSCH", "ITALIANO", "HISTORY"]
     },
     {
       id: "s3_art",
@@ -81,7 +81,7 @@ export const FORM_CONFIG = {
     {
       id: "s3_sci_math",
       triggers: ["S3-AR-SCIENCE", "S3-EN-SCIENCE", "S3-AR-MATH", "S3-EN-MATH"],
-      subjects: ["PHYSICS", "BIOLOGY", "MATH", "CHEMISTRY", "ITALIANO", "ENGLISH", "DEUTSCH", "FRENCH", "ARABIC"]
+      subjects: ["PHYSICS", "BIOLOGY", "Pure MATH", "Applied MATH", "CHEMISTRY", "ITALIANO", "ENGLISH", "DEUTSCH", "FRENCH", "ARABIC"]
     }
   ]
 };
