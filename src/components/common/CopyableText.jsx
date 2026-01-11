@@ -1,6 +1,6 @@
 'use client';
 import React, { useState } from 'react';
-import { copyToClipboard } from '@/utils/utils';
+import { copyToClipboard } from '../../utils/utils';
 import './CopyableText.css';
 
 const CopyableText = ({ text, className = '' }) => {

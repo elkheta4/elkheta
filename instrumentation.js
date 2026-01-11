@@ -18,7 +18,7 @@ export async function register() {
     console.log('');
 
     // Dynamic import to avoid issues during build
-    const { warmAllCaches } = await import('./lib/cacheWarmer.js');
+    const { warmAllCaches } = await import('./src/lib/cacheWarmer.js');
     
     // Warm caches in background (don't block server startup)
     warmAllCaches().catch(error => {
