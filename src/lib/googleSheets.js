@@ -1,42 +1,49 @@
 import { GoogleSpreadsheet } from 'google-spreadsheet';
 import { JWT } from 'google-auth-library';
 
-// Config Variables
-const SERVICE_ACCOUNT_EMAIL = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
-const PRIVATE_KEY = process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n');
-const SHEET_ID_USERS = process.env.SHEET_ID_USERS;
-const SHEET_ID_SALES = process.env.SHEET_ID_SALES;
-
-// Debug Logs (Server Side)
+// Debug Logs (Server Side) - Safe to keep top level as they just read env, don't throw
 console.log('[GoogleSheets] Init Check:', {
-    hasEmail: !!SERVICE_ACCOUNT_EMAIL,
-    hasKey: !!PRIVATE_KEY,
-    keyLength: PRIVATE_KEY ? PRIVATE_KEY.length : 0,
-    sheetUsers: SHEET_ID_USERS,
-    sheetSales: SHEET_ID_SALES
+    hasEmail: !!process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
+    hasKey: !!process.env.GOOGLE_PRIVATE_KEY,
+    sheetUsers: process.env.SHEET_ID_USERS,
+    sheetSales: process.env.SHEET_ID_SALES
 });
 
-if (!SERVICE_ACCOUNT_EMAIL || !PRIVATE_KEY || !SHEET_ID_USERS) {
-    console.error('[GoogleSheets] Missing Env Vars');
-    throw new Error('Missing Google Sheets Environment Variables');
-}
+let serviceAccountAuth = null;
 
-// Singleton Auth Client
-const serviceAccountAuth = new JWT({
-    email: SERVICE_ACCOUNT_EMAIL,
-    key: PRIVATE_KEY,
-    scopes: [
-        'https://www.googleapis.com/auth/spreadsheets',
-    ],
-});
+const getAuthClient = () => {
+    if (serviceAccountAuth) return serviceAccountAuth;
+
+    const SERVICE_ACCOUNT_EMAIL = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
+    const PRIVATE_KEY = process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n');
+
+    if (!SERVICE_ACCOUNT_EMAIL || !PRIVATE_KEY) {
+        console.error('[GoogleSheets] Missing Env Vars for Auth');
+        throw new Error('Missing Google Sheets Environment Variables (Email or Private Key)');
+    }
+
+    serviceAccountAuth = new JWT({
+        email: SERVICE_ACCOUNT_EMAIL,
+        key: PRIVATE_KEY,
+        scopes: [
+            'https://www.googleapis.com/auth/spreadsheets',
+        ],
+    });
+    return serviceAccountAuth;
+};
 
 export const getUsersSheet = async () => {
-    const doc = new GoogleSpreadsheet(SHEET_ID_USERS, serviceAccountAuth);
+    const SHEET_ID_USERS = process.env.SHEET_ID_USERS;
+    if (!SHEET_ID_USERS) throw new Error('Missing SHEET_ID_USERS Environment Variable');
+
+    const doc = new GoogleSpreadsheet(SHEET_ID_USERS, getAuthClient());
     await doc.loadInfo();
     return doc.sheetsByTitle['Users'];
 };
 
 export const getAgentSheet = async (agentName, createIfMissing = true) => {
+    const SHEET_ID_SALES = process.env.SHEET_ID_SALES;
+    
     // Note: If using a separate Spreadsheet for Sales, use SHEET_ID_SALES.
     // If using the SAME spreadsheet as Users (tabs), use SHEET_ID_USERS.
     // Based on user request "SEPARATE SHEETS: Users Spreadsheet... Sales Spreadsheet...", we assume distinct IDs.
@@ -45,7 +52,7 @@ export const getAgentSheet = async (agentName, createIfMissing = true) => {
         throw new Error('Missing SHEET_ID_SALES Environment Variable');
     }
 
-    const doc = new GoogleSpreadsheet(SHEET_ID_SALES, serviceAccountAuth);
+    const doc = new GoogleSpreadsheet(SHEET_ID_SALES, getAuthClient());
     await doc.loadInfo();
 
     if (!agentName) {
